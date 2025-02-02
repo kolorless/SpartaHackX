@@ -1,74 +1,151 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { useRouter } from 'expo-router';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function WorkoutScreen() {
+  const router = useRouter(); // Hook at top level of component
+  const username = "Yash";
+  const workoutCount = 19;
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
+      
+      {/* Top Logo */}
+      <View style={styles.logoContainer}>
+        <Text style={styles.logoText}>BOD FIX</Text>
+      </View>
+
+      {/* Main Content */}
+      <View style={styles.content}>
+        <Text style={styles.greeting}>Hey {username},</Text>
+        <Text style={styles.workoutText}>
+          You have recorded {workoutCount}{'\n'}workouts so far!
+        </Text>
+        
+        <Text style={styles.subText}>Let's add another? 💪</Text>
+
+        {/* Start Workout Button */}
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/(tabs)/camera")}>
+          <Text style={styles.buttonText}>Start Workout</Text>
+        </TouchableOpacity>
+
+        {/* Barbell Image */}
+        <View style={styles.barbellContainer}>
+          {/* Replace with your actual barbell image */}
+          <Image
+            source={require('@/assets/images/barbell.png')}
+            style={styles.barbellImage}
+            resizeMode="contain"
+          />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: '#FFE4D6', // Peachy background color
+  },
+  logoContainer: {
+    flexDirection: "row",
+    height: 66.88,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  logoText: {
+    fontSize: 36,
+    fontWeight: 600,
+    color: '#FF0000',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  greeting: {
+    fontSize: 32,
+    color: '#1E40AF', // Dark blue color
+    fontWeight: '600',
+    marginBottom: 10,
+  },
+  workoutText: {
+    fontSize: 28,
+    color: '#1E40AF',
+    fontWeight: '500',
+    lineHeight: 40,
+    marginBottom: 20,
+  },
+  subText: {
+    fontSize: 24,
+    color: '#1E40AF',
+    marginBottom: 30,
+    marginTop: 40,
+  },
+  button: {
+    backgroundColor: '#1E40AF',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  barbellContainer: {
     position: 'absolute',
+    padding: 0,
+    bottom: 100,
+    left: 0,
+    right: 0,
+    // alignItems: 'c',
+  },
+  barbellImage: {
+    width: 200,
+    height: 100,
+  },
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: '#FFD6C4', // Slightly darker shade for navbar
+  },
+  navItem: {
+    padding: 10,
+  },
+  navCircle: {
+    width: 24,
+    height: 24,
+    borderWidth: 2,
+    borderColor: '#000',
+    borderRadius: 12,
+  },
+  navHome: {
+    width: 24,
+    height: 24,
+    borderWidth: 2,
+    borderColor: '#000',
+    transform: [{ rotate: '45deg' }],
+  },
+  navMenu: {
+    width: 24,
+    height: 18,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
 });

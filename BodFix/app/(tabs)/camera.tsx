@@ -1,6 +1,7 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useRef, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -18,7 +19,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>We need your permission to show the camera</Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <Button onPress={requestPermission} title="Grant permission" />
       </View>
     );
   }
@@ -74,8 +75,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'red',
     marginBottom: "64",
-    padding: "10",
-    borderRadius: "30",
+    padding: 10,
+    borderRadius: 30,
   },
   stop_button: {
     flex: 1,
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: "64",
     padding: "10",
-    borderRadius: "30",
+    borderRadius: 30,
   },
   start_text: {
     fontSize: 18,
